@@ -21,7 +21,11 @@ public class User {
     }
 
     public User(String firstName, String lastName, String username, String email, String password) {
-
+        setFirstName(firstName);
+        setLastName(lastName);
+        setUsername(username);
+        setEmail(email);
+        setPassword(password);
     }
 
     public String getFirstName() {
