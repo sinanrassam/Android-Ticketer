@@ -16,7 +16,7 @@ import javax.ejb.Singleton;
  * @author sinan
  */
 @Singleton
-public class UsersBeans {
+public class UsersBean {
 
     private List<User> users;
 
