@@ -8,12 +8,14 @@ package ticketerrestfulservice;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -46,5 +48,16 @@ public class UsersResource {
         }
         buffer.append("</users>");
         return buffer.toString();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void addNewUser(MultivaluedMap<String, String> formParams) {
+        String firstName = formParams.getFirst("firstName");
+        String lastName = formParams.getFirst("lastName");
+        String email = formParams.getFirst("email");
+        String username = formParams.getFirst("username");
+        String password = formParams.getFirst("password");
+        usersBean.addUser(firstName, lastName, email, username, password);
     }
 }
