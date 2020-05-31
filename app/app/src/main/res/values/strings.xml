@@ -13,7 +13,9 @@
     <string name="password">\'@password\'</string>
     <string name="Login">Login</string>
 
-<!-- Register Acitivity -->
+    <string name="error_field_required">This field is required</string>
+
+    <!-- Register Acitivity -->
     <string name="prompt_firstName">First Name</string>
     <string name="prompt_lastName">Last Name</string>
     <string name="prompt_email">Email</string>
