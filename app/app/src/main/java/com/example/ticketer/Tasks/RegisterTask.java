@@ -67,7 +67,7 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
 
     protected void onPostExecute(Integer responseCode) {
         String msg;
-        if ((responseCode >= 200) && (responseCode <= 300)) {
+        if ((responseCode >= 200) && (responseCode <= 299)) {
             msg = "Account creation was successful";
         } else {
             msg = "Account creation failed";
