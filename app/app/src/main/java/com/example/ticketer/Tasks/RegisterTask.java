@@ -4,18 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Xml;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -23,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 
 public class RegisterTask extends AsyncTask<String, Void, Void> {
     public static final String API_URL = "http://localhost:8080/TicketerRestfulService/api";
+
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
 
@@ -58,5 +54,7 @@ public class RegisterTask extends AsyncTask<String, Void, Void> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 }
