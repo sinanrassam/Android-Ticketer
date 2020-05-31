@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -56,5 +57,9 @@ public class RegisterTask extends AsyncTask<String, Void, Void> {
         }
 
         return null;
+    }
+
+    protected void onPostExecute(Void param) {
+        Toast.makeText(mContext, "Process done!", Toast.LENGTH_SHORT).show();
     }
 }
