@@ -10,6 +10,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ticketer.Tasks.RegisterTask;
+
 public class RegisterActivity extends AppCompatActivity {
 
     // UI references.
@@ -86,6 +88,13 @@ public class RegisterActivity extends AppCompatActivity {
             mFirstNameView.setError(getString(R.string.error_field_required));
             focusView = mFirstNameView;
             cancel = true;
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            RegisterTask registerTask = new RegisterTask(this);
+            registerTask.execute(firstName, lastName, email, username, password);
         }
     }
 }
