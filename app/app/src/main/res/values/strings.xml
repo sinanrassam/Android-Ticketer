@@ -12,4 +12,15 @@
     <string name="username">username</string>
     <string name="password">\'@password\'</string>
     <string name="Login">Login</string>
+
+    <string name="error_field_required">This field is required</string>
+
+    <!-- Register Acitivity -->
+    <string name="prompt_firstName">First Name</string>
+    <string name="prompt_lastName">Last Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_register">Register</string>
+    <string name="action_register_short">Register</string>
 </resources>
