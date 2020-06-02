@@ -14,8 +14,8 @@ public class TicketBean {
 
     }
 
-    public void addTicket(String title, String description, User user) {
-        tickets.add(new Ticket(title, description, user));
+    public void addTicket(String title, String description, String username) {
+        tickets.add(new Ticket(title, description, username));
     }
 
     public Collection<Ticket> getTickets() {
