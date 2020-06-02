@@ -5,21 +5,37 @@
  */
 package ticketerrestfulservice;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 /**
  *
  * @author sinan
  */
-public class User {
+@Entity
+@Table(name = "users")
+@IdClass(value = UserPK.class)
+public class User implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Id
+    @Column(name = "username")
     private String username;
+    @Id
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
 
     public User() {

@@ -46,7 +46,7 @@ public class UsersResource {
         buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         buffer.append("<users uri=").append(QUOTE).append(
                 context.getAbsolutePath()).append(QUOTE).append(">");
-        Collection<User> allUsers = usersBean.getUsers();
+        Collection<User> allUsers = usersBean.getAllUsers();
         for (User user : allUsers) {
             buffer.append(user.getXMLString());
         }
@@ -60,7 +60,7 @@ public class UsersResource {
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();        
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         
-        Collection<User> allUsers = usersBean.getUsers();
+        Collection<User> allUsers = usersBean.getAllUsers();
         for (User user : allUsers) {
             arrayBuilder.add(user.getJSONObject());
         }        
