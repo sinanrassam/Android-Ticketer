@@ -23,4 +23,12 @@
     <string name="prompt_password">Password</string>
     <string name="action_register">Register</string>
     <string name="action_register_short">Register</string>
+    <string name="enter_title_of_ticket">enter title of ticket</string>
+    <string name="submit">submit</string>
+    <string name="logout">logout</string>
+    <string name="enter_ticket_description">enter ticket description</string>
+    <string name="main_fragment_label">main fragment label</string>
+    <string name="register_fragment_label">register fragment label</string>
+    <string name="ticket_fragment_label">ticket fragment label</string>
+    <string name="Login_fragment_label">login fragment label</string>
 </resources>
