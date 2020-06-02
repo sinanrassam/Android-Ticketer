@@ -5,11 +5,17 @@
  */
 package ticketerrestfulservice;
 
+import java.math.BigDecimal;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 /**
  *
  * @author sinan
  */
 public class User {
+
     private String firstName;
     private String lastName;
     private String username;
@@ -78,5 +84,15 @@ public class User {
         buffer.append("<password>").append(getPassword()).append("</password>");
         buffer.append("</user>");
         return buffer.toString();
+    }
+
+    public JsonObject getJSONObject() {
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+        jsonBuilder.add("firstName", firstName);
+        jsonBuilder.add("lastName", lastName);
+        jsonBuilder.add("username", username);
+        jsonBuilder.add("email", email);
+        jsonBuilder.add("password", password);
+        return jsonBuilder.build();
     }
 }
