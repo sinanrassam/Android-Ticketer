@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 public class Ticket {
     private String title;
     private String description;
-    private User user;
+    private String username;
     private LocalDateTime creationDate;
 
-    public Ticket(String title, String description, User user) {
+    public Ticket(String title, String description, String username) {
         this.title = title;
         this.description = description;
-        this.user = user;
+        this.username = username;
         this.creationDate = LocalDateTime.now();
     }
 
@@ -32,16 +32,8 @@ public class Ticket {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public setUser(User user) {
-        this.user = user;
-    }
-
     public String getUsername() {
-        return this.user.getUsername();
+        return this.username;
     }
 
     public LocalDateTime getCreationDate() {
