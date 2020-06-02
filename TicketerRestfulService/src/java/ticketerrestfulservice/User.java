@@ -7,8 +7,8 @@ package ticketerrestfulservice;
 
 import java.math.BigDecimal;
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-
 
 /**
  *
@@ -86,13 +86,13 @@ public class User {
         return buffer.toString();
     }
 
-    public String getJSONString() {
+    public JsonObject getJSONObject() {
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         jsonBuilder.add("firstName", firstName);
         jsonBuilder.add("lastName", lastName);
         jsonBuilder.add("username", username);
         jsonBuilder.add("email", email);
         jsonBuilder.add("password", password);
-        return jsonBuilder.toString();
+        return jsonBuilder.build();
     }
 }

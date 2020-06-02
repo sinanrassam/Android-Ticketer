@@ -8,6 +8,10 @@ package ticketerrestfulservice;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.inject.Named;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,7 +41,7 @@ public class UsersResource {
 
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public String getAllUsers() {
+    public String getAllXMLUsers() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         buffer.append("<users uri=").append(QUOTE).append(
@@ -48,6 +52,21 @@ public class UsersResource {
         }
         buffer.append("</users>");
         return buffer.toString();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllJSONUsers() {        
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();        
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        
+        Collection<User> allUsers = usersBean.getUsers();
+        for (User user : allUsers) {
+            arrayBuilder.add(user.getJSONObject());
+        }        
+        JsonObject json = jsonBuilder.add("users", arrayBuilder).build();
+        
+        return json.toString();
     }
 
     @POST
