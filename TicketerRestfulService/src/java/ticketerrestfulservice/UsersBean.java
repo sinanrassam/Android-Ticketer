@@ -5,36 +5,42 @@
  */
 package ticketerrestfulservice;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author sinan
  */
-@Singleton
+@WebService // also made a web service for convenient testing
+@Stateless
+@LocalBean
 public class UsersBean {
 
-    private List<User> users;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @PostConstruct
-    public void initialisePetCollection() {
-        // convenience list to avoid using any database
-        users = new ArrayList<>();
-        addUser("Sinan", "Rassam", "sinan", "sinan@sinan.com", "sinan");
-        addUser("Christian", "Te Maari", "temaari", "christian@christian.com", "christian");
-        addUser("Bob", "Bobby", "bob", "bob@bobby.com", "bob");
-        addUser("Mike", "Mikey", "mike", "mike@mikey.com", "mike");
+    public User addUser(String firstName, String lastName, String username, String email, String password) {
+        User newUser = new User(firstName, lastName, username, email, password);
+        entityManager.persist(newUser); // note already in transaction
+        return newUser;
     }
 
-    public void addUser(String firstName, String lastName, String username, String email, String password) {
-        users.add(new User(firstName, lastName, username, email, password));
+    public User getUser(String username, String email) {
+        UserPK primaryKey = new UserPK(username, email);
+        User user = entityManager.find(User.class, primaryKey);
+        return user;
+    }    
+
+    public List<User> getAllUsers() {
+        String jpqlCommand = "SELECT u FROM User u";
+        Query query = entityManager.createQuery(jpqlCommand);
+        return query.getResultList();
     }
 
-    public Collection<User> getUsers() {
-        return users;
-    }
 }
