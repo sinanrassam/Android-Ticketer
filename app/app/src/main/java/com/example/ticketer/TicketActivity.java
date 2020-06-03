@@ -7,12 +7,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.ticketer.Tasks.TicketTask;
+import com.example.ticketer.Tasks.NewTicketTask;
 
 
 public class TicketActivity extends AppCompatActivity {
@@ -67,8 +65,8 @@ public class TicketActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            TicketTask ticketTask = new TicketTask(this);
-            ticketTask.execute(title, desciption, "tickettester");
+            NewTicketTask newTicketTask = new NewTicketTask(this);
+            newTicketTask.execute(title, desciption, "tickettester");
         }
     }
 
