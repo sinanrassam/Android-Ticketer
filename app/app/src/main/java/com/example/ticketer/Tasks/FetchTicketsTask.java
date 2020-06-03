@@ -68,25 +68,21 @@ public class FetchTicketsTask extends AsyncTask<String, Void, Integer> {
             conn.disconnect();
 
             if (json != null) {
-                mTicketList = new ArrayList<>();
-                try {
-                    JSONArray jsonArray = (JSONArray) json.get("tickets");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                        String title = (String) jsonObject.get("title");
-                        String desc = (String) jsonObject.get("description");
-                        String username = (String) jsonObject.get("username");
-                        String date = (String) jsonObject.get("creation_date");
+                JSONArray jsonArray = (JSONArray) json.get("tickets");
+                mTicketList = new ArrayList<>(jsonArray.length());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    String title = (String) jsonObject.get("title");
+                    String desc = (String) jsonObject.get("description");
+                    String username = (String) jsonObject.get("username");
+                    String date = (String) jsonObject.get("creation_date");
 
-                        Map<String, String> ticket = new HashMap<>();
+                    Map<String, String> ticket = new HashMap<>();
 
-                        ticket.put("Title", title);
-                        ticket.put("Desc", desc + " by: " + username + " - " + date);
+                    ticket.put("Title", title);
+                    ticket.put("Desc", desc + " by: " + username + " - " + date);
 
-                        mTicketList.add(i, ticket);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    mTicketList.add(ticket);
                 }
             }
         } catch (IOException | JSONException e) {
@@ -98,7 +94,6 @@ public class FetchTicketsTask extends AsyncTask<String, Void, Integer> {
 
     protected void onPostExecute(Integer responseCode) {
         String msg;
-        Log.d("responseCode", String.valueOf(responseCode));
         if ((responseCode >= 200) && (responseCode <= 299)) {
             msg = "Tickets Fetched";
 
