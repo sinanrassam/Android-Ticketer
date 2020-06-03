@@ -31,4 +31,6 @@
     <string name="register_fragment_label">register fragment label</string>
     <string name="ticket_fragment_label">ticket fragment label</string>
     <string name="Login_fragment_label">login fragment label</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
