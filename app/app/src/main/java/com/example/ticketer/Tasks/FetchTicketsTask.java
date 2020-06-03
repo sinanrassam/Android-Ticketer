@@ -51,6 +51,8 @@ public class FetchTicketsTask extends AsyncTask<String, Void, Integer> {
             URL url = new URL(API_URL + "/tickets/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
 
             // Read the server response and return it as JSON
             InputStream inputStream = conn.getInputStream();

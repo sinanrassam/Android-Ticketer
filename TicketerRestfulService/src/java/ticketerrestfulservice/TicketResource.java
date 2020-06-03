@@ -39,20 +39,20 @@ public class TicketResource {
     public TicketResource() {
     }
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public String getAllTixketsXML() {
-//        StringBuilder buffer = new StringBuilder();
-//        buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-//        buffer.append("<tickets uri=").append(QUOTE).append(
-//                context.getAbsolutePath()).append(QUOTE).append(">");
-//        Collection<Ticket> allTickets = ticketBean.getTickets();
-//        for (Ticket ticket : allTickets) {
-//            buffer.append(ticket.getXMLString());
-//        }
-//        buffer.append("</tickets>");
-//        return buffer.toString();
-//    }
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public String getAllTixketsXML() {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        buffer.append("<tickets uri=").append(QUOTE).append(
+                context.getAbsolutePath()).append(QUOTE).append(">");
+        Collection<Ticket> allTickets = ticketBean.getTickets();
+        for (Ticket ticket : allTickets) {
+            buffer.append(ticket.getXMLString());
+        }
+        buffer.append("</tickets>");
+        return buffer.toString();
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
