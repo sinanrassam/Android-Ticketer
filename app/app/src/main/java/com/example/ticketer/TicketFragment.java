@@ -3,13 +3,16 @@ package com.example.ticketer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TicketFragment extends Fragment {
+import com.example.ticketer.Tasks.FetchTicketsTask;
+
+public class TicketFragment extends ListFragment {
 
     private SwipeRefreshLayout refreshLayout;
 
@@ -38,6 +41,6 @@ public class TicketFragment extends Fragment {
     }
 
     private void refresh() {
-        // Create a task to fetch tickets
+        new FetchTicketsTask(this).execute();
     }
 }
