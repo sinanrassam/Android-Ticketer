@@ -46,7 +46,7 @@ public class TicketResource {
         buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         buffer.append("<tickets uri=").append(QUOTE).append(
                 context.getAbsolutePath()).append(QUOTE).append(">");
-        Collection<Ticket> allTickets = ticketBean.getTickets();
+        Collection<Ticket> allTickets = ticketBean.getAllTickets();
         for (Ticket ticket : allTickets) {
             buffer.append(ticket.getXMLString());
         }
@@ -60,7 +60,7 @@ public class TicketResource {
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();        
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         
-        Collection<Ticket> allTickets = ticketBean.getTickets();
+        Collection<Ticket> allTickets = ticketBean.getAllTickets();
         for (Ticket ticket : allTickets) {
             arrayBuilder.add(ticket.getJSONObject());
         }        
