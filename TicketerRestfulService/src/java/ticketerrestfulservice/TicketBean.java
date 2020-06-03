@@ -1,29 +1,36 @@
 package ticketerrestfulservice;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
-@Singleton
+@WebService
+@Stateless
+@LocalBean
 public class TicketBean {
-    private List<Ticket> tickets;
 
-    @PostConstruct
-    public void  initialiseTickets() {
-        tickets = new ArrayList<>();
-        addTicket("Internet issue", "there is an internet problem", "username1");
-        addTicket("Hardware issue", "My laptop seem's to be broken", "chris");
-        addTicket("Cooling Issue", "is it hot in here?", "Bobby");
-        addTicket("User Issue", "It's not working", "Jimz");
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public Ticket addTicket(String title, String description, String username) {
+        Ticket newTicket = new Ticket(title, description, username);
+        entityManager.persist(newTicket); // note already in transaction
+        return newTicket;
     }
 
-    public void addTicket(String title, String description, String username) {
-        tickets.add(new Ticket(title, description, username));
-    }
+    public Ticket getTicket(String username) {
+        TicketPK primaryKey = new TicketPK(username);
+        Ticket ticket = entityManager.find(Ticket.class, primaryKey);
+        return ticket;
+    }    
 
-    public Collection<Ticket> getTickets() {
-        return tickets;
+    public List<Ticket> getAllTickets() {
+        String jpqlCommand = "SELECT u FROM Ticket u";
+        Query query = entityManager.createQuery(jpqlCommand);
+        return query.getResultList();
     }
 }

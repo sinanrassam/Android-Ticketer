@@ -6,6 +6,8 @@
 **/nbproject/genfiles.properties
 **/nbproject/jax-ws.xml
 **/nbproject/jaxws-build.xml
+TicketerRestfulService/nbproject/jax-ws.xml
+TicketerRestfulService/nbproject/jaxws-build.xml
 build/*
 nbbuild/
 dist/

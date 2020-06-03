@@ -1,22 +1,45 @@
 package ticketerrestfulservice;
 
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime; 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
-public class Ticket {
+
+@Entity
+@Table(name = "tickets")
+@IdClass(value = TicketPK.class)
+public class Ticket implements Serializable {
+
+    // private LocalDateTime creationDate;
+    private static final long serialVersionUID = 1L;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
+    @Id
+    @Column(name = "username")
     private String username;
-    private LocalDateTime creationDate;
+    @Column(name = "creation_date")
+    private String creation;
+    
+
+    public Ticket() {
+
+    }
 
     public Ticket(String title, String description, String username) {
         this.title = title;
         this.description = description;
         this.username = username;
-        this.creationDate = LocalDateTime.now();
+        // this.creationDate = LocalDateTime.now();
     }
 
     public String getTitle() {
@@ -39,14 +62,14 @@ public class Ticket {
         return this.username;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
+    // public LocalDateTime getCreationDate() {
+    //     return creationDate;
+    // }
 
     public String getCreationDateString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
-        String creationDateString = dtf.format(this.creationDate);
-        return creationDateString;
+        // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        // String creationDateString = dtf.format(this.creationDate);
+        return creation;
     }
 
     public String getXMLString() {
