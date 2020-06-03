@@ -7,10 +7,7 @@ import android.util.Log;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
-
-import com.example.ticketer.Classes.Ticket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,8 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,13 +89,7 @@ public class FetchTicketsTask extends AsyncTask<String, Void, Integer> {
                     e.printStackTrace();
                 }
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
