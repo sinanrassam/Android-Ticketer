@@ -31,10 +31,14 @@ public class UsersBean {
         return newUser;
     }
 
-    public User getUser(String username, String email) {
-        UserPK primaryKey = new UserPK(username, email);
-        User user = entityManager.find(User.class, primaryKey);
-        return user;
+    public List<User> getUser(String username) {
+        String jpqlCommand = "SELECT u FROM User u WHERE u.username = :username" ;
+        Query query = entityManager.createQuery(jpqlCommand);
+        query.setParameter("username", username);
+        return query.getResultList();
+//        UserPK primaryKey = new UserPK(username);
+//        User user = entityManager.find(User.class, primaryKey);
+//        return user;
     }    
 
     public List<User> getAllUsers() {

@@ -32,7 +32,7 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
     @Override
     protected Integer doInBackground(String... parameters) {
         int responseCode = 0;
-        try {
+        try {   
             String postData = URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
             postData += URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
             postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";

@@ -17,7 +17,6 @@ import com.example.ticketer.Tasks.RegisterTask;
 public class RegisterActivity extends AppCompatActivity {
 
     // UI references.
-    public static final String GOOGLE_ACCOUNT = "google_account";
     private EditText mFirstNameView;
     private EditText mLastNameView;
     private EditText mEmailView;
