@@ -37,6 +37,8 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
 
     private boolean success;
 
+    private String username;
+
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
 
@@ -47,9 +49,10 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected Integer doInBackground(String... parameters) {
+        username = parameters[0];
         int responseCode = 0;
         try {
-            URL url = new URL(API_URL + "/users/"+parameters[0]);
+            URL url = new URL(API_URL + "/users/"+username);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -107,6 +110,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
         if ((responseCode >= 200) && (responseCode <= 299) && success) {
             msg = "Login was successful";
             Intent myIntent = new Intent(mContext, MainActivity.class);
+            myIntent.putExtra("username", username);
             mContext.startActivity(myIntent);
         } else {
             msg = "Login failed";
