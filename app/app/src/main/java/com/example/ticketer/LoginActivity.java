@@ -24,11 +24,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUsernameView;
     private EditText mPasswordView;
 
+    private String username;
+
     TextView userView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        username = getIntent().getStringExtra("username");
 
         mUsernameView = findViewById(R.id.userName);
         String passedUsername = getIntent().getStringExtra("username_key");
@@ -54,6 +58,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (username != null) {
+            mUsernameView.setText(username);
+        }
     }
 
     private void attemptLogin() {
