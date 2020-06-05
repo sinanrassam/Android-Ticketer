@@ -2,12 +2,15 @@ package com.example.ticketer.Tasks;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.ticketer.TicketActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Parameter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -29,6 +33,8 @@ import java.nio.charset.StandardCharsets;
 
 public class UserLogin extends AsyncTask<String, Void, Integer> {
     public static final String API_URL = "http://10.0.2.2:8080/TicketerRestfulService/api";
+
+    private boolean success;
 
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
@@ -47,7 +53,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
-            Log.d("", parameters[0]);
+            Log.d("This is the sinan", parameters[0]+".."+url);
             InputStream inputStream = conn.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
@@ -67,6 +73,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
             conn.disconnect();
 
             if (json != null) {
+                Log.d("some message", parameters[0]+":"+parameters[1]);
                 try {
                     JSONArray jsonArray = (JSONArray) json.get("users");
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -74,33 +81,43 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
                         String password = (String) jsonObject.get("password");
                         if (password.equals(parameters[1])) {
                             Log.d("Password is ", "correct");
+                            this.success = true;
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-    } catch (MalformedURLException e) {
-        e.printStackTrace();
-    } catch (ProtocolException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    } catch (JSONException e) {
-        e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return responseCode;
     }
 
-
-
-        return responseCode;
+    public boolean getSuccess() {
+        return success;
     }
 
     protected void onPostExecute(Integer responseCode) {
         String msg;
+        Log.d("some login", "this.success"+this.success );
         if ((responseCode >= 200) && (responseCode <= 299)) {
-            msg = "Login was successful";
+            if (this.success) {
+                msg = "Login was successful";
+            }else {
+                msg = "Login failed";
+            }
+
+
         } else {
             msg = "Login failed";
+            this.success = false;
         }
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
