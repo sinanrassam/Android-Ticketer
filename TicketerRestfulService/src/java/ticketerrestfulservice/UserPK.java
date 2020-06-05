@@ -20,6 +20,10 @@ public class UserPK implements Serializable {
         this.username = username;
         this.email = email;
     }
+    
+    public UserPK(String username) {
+        this.username = username;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -32,9 +36,9 @@ public class UserPK implements Serializable {
             if ((username != null) && (other.username != null)) {
                 isEqual = username.equals(other.username);
 
-                if (isEqual && ((email != null) && (other.email != null))) {
-                    isEqual = email.equals(other.email);
-                }
+//                if (isEqual && ((email != null) && (other.email != null))) {
+//                    isEqual = email.equals(other.email);
+//                }
             }
 
             return isEqual;

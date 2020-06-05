@@ -19,7 +19,7 @@ public class TicketActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket);
+            setContentView(R.layout.activity_ticket);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New Ticket");

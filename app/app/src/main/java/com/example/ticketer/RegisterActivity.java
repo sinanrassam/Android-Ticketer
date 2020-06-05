@@ -1,11 +1,13 @@
 package com.example.ticketer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,12 +19,12 @@ import com.example.ticketer.Tasks.RegisterTask;
 public class RegisterActivity extends AppCompatActivity {
 
     // UI references.
-    public static final String GOOGLE_ACCOUNT = "google_account";
     private EditText mFirstNameView;
     private EditText mLastNameView;
     private EditText mEmailView;
     private EditText mUsernameView;
     private EditText mPasswordView;
+    EditText passingUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,16 @@ public class RegisterActivity extends AppCompatActivity {
         mUsernameView = findViewById(R.id.username);
         mPasswordView = findViewById(R.id.password);
 
+        passingUsername = (EditText)findViewById(R.id.username);
+
         Button mRegisterBtn = findViewById(R.id.register_btn);
 
         mRegisterBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intentMessage = new Intent(RegisterActivity.this, LoginActivity.class);
+                String message = passingUsername.getText().toString();
+                intentMessage.putExtra("username_key", message);
                 attemptRegister();
             }
         });
