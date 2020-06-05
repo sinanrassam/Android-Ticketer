@@ -101,10 +101,6 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
         return responseCode;
     }
 
-    public boolean getSuccess() {
-        return success;
-    }
-
     protected void onPostExecute(Integer responseCode) {
         String msg;
         Log.d("some login", "this.success"+this.success );
