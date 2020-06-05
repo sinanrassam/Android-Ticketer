@@ -82,7 +82,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
                         String password = (String) jsonObject.get("password");
                         if (password.equals(parameters[1])) {
                             Log.d("Password is ", "correct");
-                            this.success = true;
+                            success = true;
                         }
                     }
                 } catch (JSONException e) {
@@ -103,7 +103,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
 
     protected void onPostExecute(Integer responseCode) {
         String msg;
-        Log.d("some login", "this.success"+this.success );
+        Log.d("some login", "this.success" + success );
         if ((responseCode >= 200) && (responseCode <= 299) && success) {
             msg = "Login was successful";
             Intent myIntent = new Intent(mContext, MainActivity.class);
