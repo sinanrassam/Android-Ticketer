@@ -1,13 +1,19 @@
 package com.example.ticketer.Tasks;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+
+import com.example.ticketer.LoginActivity;
+import com.example.ticketer.MainActivity;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -67,6 +73,9 @@ public class NewTicketTask extends AsyncTask<String, Void, Integer> {
         String msg;
         if ((responseCode >= 200) && (responseCode <= 299)) {
             msg = "Account creation was successful";
+            Intent myIntent = new Intent(mContext, MainActivity.class);
+            ActivityCompat.finishAffinity((Activity) mContext);
+            mContext.startActivity(myIntent);
         } else {
             msg = "Account creation failed";
         }

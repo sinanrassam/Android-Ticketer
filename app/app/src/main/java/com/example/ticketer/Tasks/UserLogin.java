@@ -1,6 +1,7 @@
 package com.example.ticketer.Tasks;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 
 import com.example.ticketer.MainActivity;
 import com.example.ticketer.TicketActivity;
@@ -111,6 +113,7 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
             msg = "Login was successful";
             Intent myIntent = new Intent(mContext, MainActivity.class);
             myIntent.putExtra("username", username);
+            ActivityCompat.finishAffinity((Activity) mContext);
             mContext.startActivity(myIntent);
         } else {
             msg = "Login failed";

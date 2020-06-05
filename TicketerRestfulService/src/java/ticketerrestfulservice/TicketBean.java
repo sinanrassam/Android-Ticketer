@@ -22,8 +22,8 @@ public class TicketBean {
         return newTicket;
     }
 
-    public Ticket getTicket(String username) {
-        TicketPK primaryKey = new TicketPK(username);
+    public Ticket getTicket(Integer id) {
+        TicketPK primaryKey = new TicketPK(id);
         Ticket ticket = entityManager.find(Ticket.class, primaryKey);
         return ticket;
     }    
