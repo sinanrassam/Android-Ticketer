@@ -1,17 +1,18 @@
 package ticketerrestfulservice;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime; 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "tickets")
@@ -20,16 +21,18 @@ public class Ticket implements Serializable {
 
     // private LocalDateTime creationDate;
     private static final long serialVersionUID = 1L;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private Integer id;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
     private String description;
-    @Id
     @Column(name = "username")
     private String username;
     @Column(name = "creation_date")
-    private String creation;
-    
+    private LocalDateTime creationDate;
 
     public Ticket() {
 
@@ -39,13 +42,13 @@ public class Ticket implements Serializable {
         this.title = title;
         this.description = description;
         this.username = username;
-        // this.creationDate = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now();
     }
 
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -53,7 +56,7 @@ public class Ticket implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -62,14 +65,14 @@ public class Ticket implements Serializable {
         return this.username;
     }
 
-    // public LocalDateTime getCreationDate() {
-    //     return creationDate;
-    // }
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 
     public String getCreationDateString() {
-        // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
-        // String creationDateString = dtf.format(this.creationDate);
-        return creation;
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+         String creationDateString = dtf.format(this.creationDate);
+        return creationDateString;
     }
 
     public String getXMLString() {
@@ -90,6 +93,14 @@ public class Ticket implements Serializable {
         jsonBuilder.add("username", username);
         jsonBuilder.add("creation_date", getCreationDateString());
         return jsonBuilder.build();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }

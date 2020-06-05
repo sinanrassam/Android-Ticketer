@@ -10,35 +10,28 @@ import java.io.Serializable;
 
 public class TicketPK implements Serializable {
 
-    public String username;
+    public Integer id;
 
-    public TicketPK(String username) {
-        this.username = username;
+    public TicketPK(Integer id) {
+        this.id = id;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof TicketPK)) {
             return false;
         } else {
-            boolean isEqual = false;
             TicketPK other = (TicketPK) obj;
-
-            if ((username != null) && (other.username != null)) {
-                isEqual = username.equals(other.username);
-            }
-
-            return isEqual;
+            return id.equals(other.id);
         }
     }
 
     @Override
     public int hashCode() {
-        int hashCode = 0;
-        if (username != null) {
-            hashCode ^= username.hashCode();
+        if (id == null) {
+            return 0;
+        } else {
+            return id.hashCode();
         }
-        return hashCode;
     }
-
 }
