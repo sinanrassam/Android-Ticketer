@@ -66,22 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             UserLogin userLogin = new UserLogin(this);
             userLogin.execute(username, password);
-            boolean loginSuccess = userLogin.getSuccess();
-            int counter = 500000;
-            while (true) {
-                loginSuccess = userLogin.getSuccess();
-                counter = counter - 1;
-                if (loginSuccess || counter <= 0) {
-                    
-                    Intent myIntent = new Intent(getBaseContext(),   MainActivity.class);
-                    startActivity(myIntent);
-                    break;
-                }
-
-            }
-
-
-
         }
     }
 

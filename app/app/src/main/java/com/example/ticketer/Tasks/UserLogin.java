@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.ticketer.MainActivity;
 import com.example.ticketer.TicketActivity;
 
 import org.json.JSONArray;
@@ -107,17 +108,12 @@ public class UserLogin extends AsyncTask<String, Void, Integer> {
     protected void onPostExecute(Integer responseCode) {
         String msg;
         Log.d("some login", "this.success"+this.success );
-        if ((responseCode >= 200) && (responseCode <= 299)) {
-            if (this.success) {
-                msg = "Login was successful";
-            }else {
-                msg = "Login failed";
-            }
-
-
+        if ((responseCode >= 200) && (responseCode <= 299) && success) {
+            msg = "Login was successful";
+            Intent myIntent = new Intent(mContext, MainActivity.class);
+            mContext.startActivity(myIntent);
         } else {
             msg = "Login failed";
-            this.success = false;
         }
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
