@@ -22,8 +22,7 @@ public class TicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ticket);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Ticketer");
+        actionBar.setTitle("New Ticket");
 
         mTitleView = findViewById(R.id.title);
         mDescriptionView = findViewById(R.id.desciption);
