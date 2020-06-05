@@ -3,12 +3,14 @@ package com.example.ticketer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -21,12 +23,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mUsernameView;
     private EditText mPasswordView;
+
+    TextView userView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mUsernameView = findViewById(R.id.userName);
+        String passedUsername = getIntent().getStringExtra("username_key");
+        userView = (TextView)findViewById(R.id.userName);
+        userView.setText(passedUsername);
         mPasswordView = findViewById(R.id.password);
         Button mLoginButtonn = findViewById(R.id.button_first);
 
@@ -34,6 +41,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Button mReigsterButotn = findViewById(R.id.register_button);
+
+        mReigsterButotn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(getBaseContext(), RegisterActivity.class);
+                startActivity(myIntent);
             }
         });
 

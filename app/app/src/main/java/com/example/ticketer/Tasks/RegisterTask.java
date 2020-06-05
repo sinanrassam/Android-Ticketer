@@ -2,12 +2,16 @@ package com.example.ticketer.Tasks;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.ticketer.LoginActivity;
+import com.example.ticketer.MainActivity;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -40,7 +44,6 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
             postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 
             Log.d("hi", postData);
-
             URL url = new URL(API_URL + "/users/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
@@ -69,6 +72,8 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
         String msg;
         if ((responseCode >= 200) && (responseCode <= 299)) {
             msg = "Account creation was successful";
+            Intent myIntent = new Intent(mContext, LoginActivity.class);
+            mContext.startActivity(myIntent);
         } else {
             msg = "Account creation failed";
         }
