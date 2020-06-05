@@ -17,9 +17,13 @@ public class TicketActivity extends AppCompatActivity {
     private EditText mTitleView;
     private EditText mDescriptionView;
 
+    String username;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_ticket);
+
+        username = getIntent().getStringExtra("username");
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New Ticket");
@@ -65,7 +69,7 @@ public class TicketActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             NewTicketTask newTicketTask = new NewTicketTask(this);
-            newTicketTask.execute(title, desciption, "tickettester");
+            newTicketTask.execute(title, desciption, username);
         }
     }
 

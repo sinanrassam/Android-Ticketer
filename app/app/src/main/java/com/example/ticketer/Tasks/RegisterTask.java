@@ -28,6 +28,8 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
     @SuppressLint("StaticFieldLeak")
     private Context mContext;
 
+    private String username;
+
     public RegisterTask(Context context) {
         this.mContext = context;
     }
@@ -35,12 +37,13 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected Integer doInBackground(String... parameters) {
+        username = parameters[3];
         int responseCode = 0;
-        try {   
+        try {
             String postData = URLEncoder.encode("firstName", "UTF-8") + "=" + URLEncoder.encode(parameters[0], "UTF-8") + "&";
             postData += URLEncoder.encode("lastName", "UTF-8") + "=" + URLEncoder.encode(parameters[1], "UTF-8") + "&";
             postData += URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(parameters[2], "UTF-8") + "&";
-            postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(parameters[3], "UTF-8") + "&";
+            postData += URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&";
             postData += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(parameters[4], "UTF-8");
 
             Log.d("hi", postData);
@@ -73,6 +76,7 @@ public class RegisterTask extends AsyncTask<String, Void, Integer> {
         if ((responseCode >= 200) && (responseCode <= 299)) {
             msg = "Account creation was successful";
             Intent myIntent = new Intent(mContext, LoginActivity.class);
+            myIntent.putExtra("username", username);
             mContext.startActivity(myIntent);
         } else {
             msg = "Account creation failed";
